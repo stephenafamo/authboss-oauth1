@@ -163,6 +163,9 @@ func (o *OAuth1) Start(w http.ResponseWriter, r *http.Request) error {
 	}
 	authboss.PutSession(w, SessionOAuth1Secret, reqSecret) // save secret in session
 	authCodeURL, err := cfg.Config.AuthorizationURL(reqToken)
+	if err != nil {
+		return fmt.Errorf("failed to get authCodeURL: %w", err)
+	}
 	for key, vals := range cfg.AdditionalParams {
 		for _, val := range vals {
 			authCodeURL.Query().Add(key, val)
