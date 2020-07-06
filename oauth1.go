@@ -44,7 +44,7 @@ import (
 
 	"github.com/dghubble/oauth1"
 
-	"github.com/volatiletech/authboss"
+	"github.com/volatiletech/authboss/v3"
 )
 
 // FormValue constants
