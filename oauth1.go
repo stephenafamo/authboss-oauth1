@@ -55,8 +55,8 @@ const (
 	// like redirection/remember.
 	SessionOAuth1Params = "oauth1_params"
 	// EventOAuth1Fail For Authboss events
-	EventOAuth1     authboss.Event = 23
-	EventOAuth1Fail authboss.Event = 24
+	EventOAuth1     authboss.Event = 233234 // random to avoid collision
+	EventOAuth1Fail authboss.Event = 249847 // random to avoid collision
 
 	FormValueOAuth1Redir = "redir"
 )
