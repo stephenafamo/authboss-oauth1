@@ -9,6 +9,7 @@ import (
 	twitterOAuth1 "github.com/dghubble/oauth1/twitter"
 )
 
+// TwitterProvider is a helper function to created a twitter oauth1 provider
 func TwitterProvider(key, secret string) Provider {
 	return Provider{
 		Config: &oauth1.Config{
