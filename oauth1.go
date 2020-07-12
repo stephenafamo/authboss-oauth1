@@ -266,7 +266,7 @@ func (o *OAuth1) End(w http.ResponseWriter, r *http.Request) error {
 	}
 
 	// Fully log user in
-	authboss.PutSession(w, authboss.SessionKey, user.GetPID())
+	authboss.PutSession(w, authboss.SessionKey, MakeOAuth1PID(provider, user.GetOAuth1UID()))
 	authboss.DelSession(w, authboss.SessionHalfAuthKey)
 
 	// Create a query string from all the pieces we've received
@@ -303,6 +303,28 @@ func (o *OAuth1) End(w http.ResponseWriter, r *http.Request) error {
 		Success:      fmt.Sprintf("Logged in successfully with %s.", strings.Title(provider)),
 	}
 	return o.Authboss.Config.Core.Redirector.Redirect(w, r, ro)
+}
+
+// MakeOAuth1PID is used to create a pid for users that don't have
+// an e-mail address or username in the normal system. This allows
+// all the modules to continue to working as intended without having
+// a true primary id. As well as not having to divide the regular and oauth
+// stuff all down the middle.
+func MakeOAuth1PID(provider, uid string) string {
+	return fmt.Sprintf("oauth1;;%s;;%s", provider, uid)
+}
+
+// ParseOAuth1PID returns the uid and provider for a given OAuth1 pid
+func ParseOAuth1PID(pid string) (provider, uid string, err error) {
+	splits := strings.Split(pid, ";;")
+	if len(splits) != 3 {
+		return "", "", fmt.Errorf("failed to parse oauth1 pid, too many segments: %s", pid)
+	}
+	if splits[0] != "oauth1" {
+		return "", "", fmt.Errorf("invalid oauth1 pid, did not start with oauth1: %s", pid)
+	}
+
+	return splits[1], splits[2], nil
 }
 
 // RMTrue is a dummy struct implementing authboss.RememberValuer
