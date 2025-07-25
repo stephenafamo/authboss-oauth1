@@ -1,4 +1,4 @@
-# OAuth1 Module for [Authboss](https://github.com/volatiletech/authboss)
+# OAuth1 Module for [Authboss](https://github.com/aarondl/authboss)
 
 ## User Auth via OAuth1
 
@@ -8,7 +8,7 @@ Module        | oauth1
 Pages         | _None_
 Routes        | /oauth1/{provider}, /oauth1/callback/{provider}
 Emails        | _None_
-Middlewares   | [LoadClientStateMiddleware](https://pkg.go.dev/github.com/volatiletech/authboss/#Authboss.LoadClientStateMiddleware)
+Middlewares   | [LoadClientStateMiddleware](https://pkg.go.dev/github.com/aarondl/authboss/#Authboss.LoadClientStateMiddleware)
 ClientStorage | Session
 ServerStorer  | [OAuth1ServerStorer](https://pkg.go.dev/github.com/stephenafamo/authboss-oauth1?tab=doc#ServerStorer)
 User          | [OAuth1User](https://pkg.go.dev/github.com/stephenafamo/authboss-oauth1?tab=doc#User)
